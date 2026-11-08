@@ -78,6 +78,7 @@ class Transformer(nn.Module):
         max_seq_len: int,
     ):
         super().__init__()
+        self.config = {k: v for k, v in locals().items() if k not in ("self", "__class__")}
         self.token_embeddings = nn.Embedding(vocab_size, d_model)
         self.pos_embeddings = nn.Embedding(max_seq_len, d_model)
         self.layers = nn.ModuleList(TransformerLayer(d_model, n_heads, d_ff) for _ in range(n_layers))
